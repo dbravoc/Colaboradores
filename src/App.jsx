@@ -22,20 +22,21 @@ const App = () => {
 
   const filtrarColaboradores = () => {
     if (!terminoBusqueda) return colaboradores;
-    return colaboradores.filter(
-      (colaborador) =>
-        colaborador.nombre.toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
-        colaborador.correo.toLowerCase().includes(terminoBusqueda.toLowerCase())
-        // Agrega más condiciones si es necesario
+    return colaboradores.filter((colaborador) =>
+      Object.values(colaborador).some((valor) =>
+        valor.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+      )
     );
   };
+  
 
   return (
     <div>
       <Buscador onBuscar={setTerminoBusqueda} />
+      <Listado colaboradores={filtrarColaboradores()} />
+
       <Formulario onAgregarColaborador={agregarColaborador} onMostrarAlerta={mostrarAlerta} />
       {alerta.mensaje && <Alerta mensaje={alerta.mensaje} tipo={alerta.tipo} />}
-      <Listado colaboradores={filtrarColaboradores()} />
     </div>
   );
 };
