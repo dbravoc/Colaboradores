@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Form, Button, FormControl, InputGroup, Container, Row, Col } from 'react-bootstrap';
 
 const Formulario = ({ onAgregarColaborador, onMostrarAlerta }) => {
   const [nuevoColaborador, setNuevoColaborador] = useState({
@@ -33,59 +34,68 @@ const Formulario = ({ onAgregarColaborador, onMostrarAlerta }) => {
       telefono: ''
     });
   };
-  
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label>Nombre:</label>
-        <input
-          type="text"
-          name="nombre"
-          value={nuevoColaborador.nombre}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Correo:</label>
-        <input
-          type="email"
-          name="correo"
-          value={nuevoColaborador.correo}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Edad:</label>
-        <input
-          type="number"
-          name="edad"
-          value={nuevoColaborador.edad}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Cargo:</label>
-        <input
-          type="text"
-          name="cargo"
-          value={nuevoColaborador.cargo}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Teléfono:</label>
-        <input
-          type="tel"
-          name="telefono"
-          value={nuevoColaborador.telefono}
-          onChange={handleChange}
-        />
-      </div>
-      <button type="submit">Agregar Colaborador</button>
-    </form>
+    <Container>
+      <Row>
+        <Col md={6}>
+          <Form onSubmit={handleSubmit}>
+            <InputGroup className="mb-3">
+              <InputGroup.Text>Nombre</InputGroup.Text>
+              <FormControl
+                type="text"
+                name="nombre"
+                value={nuevoColaborador.nombre}
+                onChange={handleChange}
+              />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+              <InputGroup.Text>Correo</InputGroup.Text>
+              <FormControl
+                type="email"
+                name="correo"
+                value={nuevoColaborador.correo}
+                onChange={handleChange}
+              />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+              <InputGroup.Text>Edad</InputGroup.Text>
+              <FormControl
+                type="number"
+                name="edad"
+                value={nuevoColaborador.edad}
+                onChange={handleChange}
+              />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+              <InputGroup.Text>Cargo</InputGroup.Text>
+              <FormControl
+                type="text"
+                name="cargo"
+                value={nuevoColaborador.cargo}
+                onChange={handleChange}
+              />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+              <InputGroup.Text>Teléfono</InputGroup.Text>
+              <FormControl
+                type="tel"
+                name="telefono"
+                value={nuevoColaborador.telefono}
+                onChange={handleChange}
+              />
+            </InputGroup>
+
+            <Button variant="primary" type="submit">Agregar Colaborador</Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
-  
 };
 
 Formulario.propTypes = {
