@@ -1,7 +1,6 @@
 // Buscador.jsx
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-
 const Buscador = ({ onBuscar }) => {
   const [termino, setTermino] = useState('');
 
