@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BaseColaboradores } from '../BaseColaboradores';
+import PropTypes from 'prop-types';
 
-const Listado = () => {
+
+const Listado = ({ colaboradores }) => { // <--- Cambio aquí
   return (
     <table className="table">
       <thead>
@@ -15,7 +16,7 @@ const Listado = () => {
         </tr>
       </thead>
       <tbody>
-        {BaseColaboradores.map((colaborador) => (
+      {colaboradores.map((colaborador) => (
           <tr key={colaborador.id}>
             <td>{colaborador.id}</td>
             <td>{colaborador.nombre}</td>
@@ -28,6 +29,10 @@ const Listado = () => {
       </tbody>
     </table>
   );
+};
+
+Listado.propTypes = {
+  colaboradores: PropTypes.func.isRequired,
 };
 
 export default Listado;

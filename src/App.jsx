@@ -11,26 +11,48 @@ const App = () => {
   const [alerta, setAlerta] = useState({ mensaje: '', tipo: '' });
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
 
-  useEffect(() => {
-    const filtrarColaboradores = () => {
-      if (!terminoBusqueda) {
-        setFiltrados(colaboradores);
-      } else {
-        const resultados = colaboradores.filter((colaborador) =>
-          Object.values(colaborador).some((valor) =>
-            valor.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
-          )
+  const agregarColaborador = (nuevoColaborador) => {
+    // Genera un nuevo ID basado en la longitud del arreglo de colaboradores
+    const nuevoId = colaboradores.length + 1;
+    
+    // Crear un nuevo colaborador con el ID generado
+    const colaboradorConId = { ...nuevoColaborador, id: nuevoId.toString() };
+
+    // Agregar el nuevo colaborador al arreglo de colaboradores
+    const nuevosColaboradores = [...colaboradores, colaboradorConId];
+    setColaboradores(nuevosColaboradores);
+
+    // Actualizar la lista filtrada si hay un término de búsqueda
+    if (terminoBusqueda) {
+        const resultados = nuevosColaboradores.filter((colaborador) =>
+            Object.values(colaborador).some((valor) =>
+                valor.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+            )
         );
         setFiltrados(resultados);
-      }
-    };
+    } else {
+        setFiltrados(nuevosColaboradores);
+    }
+};
 
-    filtrarColaboradores();
-  }, [terminoBusqueda, colaboradores]);
 
-  const agregarColaborador = (nuevoColaborador) => {
-    setColaboradores([...colaboradores, nuevoColaborador]);
+
+useEffect(() => {
+  const filtrarColaboradores = () => {
+    if (terminoBusqueda) {
+      const resultados = colaboradores.filter((colaborador) =>
+          Object.values(colaborador).some((valor) =>
+              valor.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+          )
+      );
+      setFiltrados(resultados);
+    } else {
+      setFiltrados(colaboradores);
+    }
   };
+
+  filtrarColaboradores();
+}, [terminoBusqueda, colaboradores]);
 
   const mostrarAlerta = (mensaje, tipo) => {
     setAlerta({ mensaje, tipo });
