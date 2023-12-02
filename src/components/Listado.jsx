@@ -1,10 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PropTypes from 'prop-types';
+import Table from 'react-bootstrap/Table';
+
 
 
 const Listado = ({ colaboradores }) => { // <--- Cambio aquí
   return (
-    <table className="table">
+    <Table responsive>
       <thead>
         <tr>
           <th>ID</th>
@@ -27,7 +29,7 @@ const Listado = ({ colaboradores }) => { // <--- Cambio aquí
           </tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   );
 };
 

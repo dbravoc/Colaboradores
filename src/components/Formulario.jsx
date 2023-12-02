@@ -11,6 +11,14 @@ const Formulario = ({ onAgregarColaborador, onMostrarAlerta }) => {
     telefono: ''
   });
 
+  const campos = [
+    { label: 'Nombre', name: 'nombre', type: 'text' },
+    { label: 'Correo', name: 'correo', type: 'email' },
+    { label: 'Edad', name: 'edad', type: 'number' },
+    { label: 'Cargo', name: 'cargo', type: 'text' },
+    { label: 'Teléfono', name: 'telefono', type: 'tel' },
+  ];
+
   const handleChange = (e) => {
     setNuevoColaborador({
       ...nuevoColaborador,
@@ -20,7 +28,7 @@ const Formulario = ({ onAgregarColaborador, onMostrarAlerta }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!nuevoColaborador.nombre.trim() || !nuevoColaborador.correo.trim() || !nuevoColaborador.edad.trim() || !nuevoColaborador.cargo.trim() || !nuevoColaborador.telefono.trim()) {
+    if (!Object.values(nuevoColaborador).every((value) => value.trim())) {
       onMostrarAlerta('Todos los campos son obligatorios', 'error');
       return;
     }
@@ -40,57 +48,21 @@ const Formulario = ({ onAgregarColaborador, onMostrarAlerta }) => {
       <Row>
         <Col md={6}>
           <Form onSubmit={handleSubmit}>
-            <InputGroup className="mb-3">
-              <InputGroup.Text>Nombre</InputGroup.Text>
-              <FormControl
-                type="text"
-                name="nombre"
-                value={nuevoColaborador.nombre}
-                onChange={handleChange}
-              />
-            </InputGroup>
+            {campos.map((campo) => (
+              <InputGroup className="mb-3" key={campo.name}>
+                <InputGroup.Text>{campo.label}</InputGroup.Text>
+                <FormControl
+                  type={campo.type}
+                  name={campo.name}
+                  value={nuevoColaborador[campo.name]}
+                  onChange={handleChange}
+                />
+              </InputGroup>
+            ))}
 
-            <InputGroup className="mb-3">
-              <InputGroup.Text>Correo</InputGroup.Text>
-              <FormControl
-                type="email"
-                name="correo"
-                value={nuevoColaborador.correo}
-                onChange={handleChange}
-              />
-            </InputGroup>
-
-            <InputGroup className="mb-3">
-              <InputGroup.Text>Edad</InputGroup.Text>
-              <FormControl
-                type="number"
-                name="edad"
-                value={nuevoColaborador.edad}
-                onChange={handleChange}
-              />
-            </InputGroup>
-
-            <InputGroup className="mb-3">
-              <InputGroup.Text>Cargo</InputGroup.Text>
-              <FormControl
-                type="text"
-                name="cargo"
-                value={nuevoColaborador.cargo}
-                onChange={handleChange}
-              />
-            </InputGroup>
-
-            <InputGroup className="mb-3">
-              <InputGroup.Text>Teléfono</InputGroup.Text>
-              <FormControl
-                type="tel"
-                name="telefono"
-                value={nuevoColaborador.telefono}
-                onChange={handleChange}
-              />
-            </InputGroup>
-
-            <Button variant="primary" type="submit">Agregar Colaborador</Button>
+            <Button variant="primary" type="submit">
+              Agregar Colaborador
+            </Button>
           </Form>
         </Col>
       </Row>
