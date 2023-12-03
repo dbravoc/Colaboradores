@@ -4,6 +4,10 @@ import Listado from './components/Listado';
 import Buscador from './components/Buscador';
 import Alerta from './components/Alerta';
 import { BaseColaboradores } from './BaseColaboradores'; // Asegúrate de que la ruta sea correcta
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import './App.css'
 
 const App = () => {
   const [colaboradores, setColaboradores] = useState(BaseColaboradores);
@@ -58,14 +62,27 @@ useEffect(() => {
   };
 
   return (
-    <div>
-      <Buscador onBuscar={setTerminoBusqueda} />
-      <Listado colaboradores={filtrados} />
+    <Container fluid>
+      <Row>
+        <Col md={3}>
+          <Formulario onAgregarColaborador={agregarColaborador} onMostrarAlerta={mostrarAlerta} />
+            {alerta.mensaje && <Alerta mensaje={alerta.mensaje} tipo={alerta.tipo} />}
+        </Col>
 
-      <Formulario onAgregarColaborador={agregarColaborador} onMostrarAlerta={mostrarAlerta} />
-      {alerta.mensaje && <Alerta mensaje={alerta.mensaje} tipo={alerta.tipo} />}
-    </div>
-  );
+        <Col md={1}>
+
+        </Col>
+
+        <Col md={8}>
+          <h1>Usuarios registrados</h1>
+          <Buscador onBuscar={setTerminoBusqueda} />
+          <Listado colaboradores={filtrados} />
+        </Col>
+      </Row>
+
+    </Container>
+
+);
 };
 
 export default App;

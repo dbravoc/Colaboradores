@@ -46,21 +46,28 @@ const Formulario = ({ onAgregarColaborador, onMostrarAlerta }) => {
   return (
     <Container>
       <Row>
-        <Col md={6}>
+        <Col>
+          <h1>
+            Registrate
+          </h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           <Form onSubmit={handleSubmit}>
             {campos.map((campo) => (
-              <InputGroup className="mb-3" key={campo.name}>
-                <InputGroup.Text>{campo.label}</InputGroup.Text>
+              <InputGroup className="m-3" key={campo.name}>
                 <FormControl
                   type={campo.type}
                   name={campo.name}
+                  placeholder={campo.label}
                   value={nuevoColaborador[campo.name]}
                   onChange={handleChange}
                 />
               </InputGroup>
             ))}
 
-            <Button variant="primary" type="submit">
+            <Button variant="info" type="submit" className='col-md-12 m-3'>
               Agregar Colaborador
             </Button>
           </Form>

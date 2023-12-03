@@ -4,9 +4,9 @@ import Table from 'react-bootstrap/Table';
 
 
 
-const Listado = ({ colaboradores }) => { // <--- Cambio aquí
+const Listado = ({ colaboradores }) => {
   return (
-    <Table responsive>
+    <Table>
       <thead>
         <tr>
           <th>ID</th>
