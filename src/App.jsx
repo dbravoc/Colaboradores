@@ -3,7 +3,7 @@ import Formulario from './components/Formulario';
 import Listado from './components/Listado';
 import Buscador from './components/Buscador';
 import Alerta from './components/Alerta';
-import { BaseColaboradores } from './BaseColaboradores'; // Asegúrate de que la ruta sea correcta
+import { BaseColaboradores } from './BaseColaboradores';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -16,17 +16,13 @@ const App = () => {
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
 
   const agregarColaborador = (nuevoColaborador) => {
-    // Genera un nuevo ID basado en la longitud del arreglo de colaboradores
     const nuevoId = colaboradores.length + 1;
     
-    // Crear un nuevo colaborador con el ID generado
     const colaboradorConId = { ...nuevoColaborador, id: nuevoId.toString() };
 
-    // Agregar el nuevo colaborador al arreglo de colaboradores
     const nuevosColaboradores = [...colaboradores, colaboradorConId];
     setColaboradores(nuevosColaboradores);
 
-    // Actualizar la lista filtrada si hay un término de búsqueda
     if (terminoBusqueda) {
         const resultados = nuevosColaboradores.filter((colaborador) =>
             Object.values(colaborador).some((valor) =>

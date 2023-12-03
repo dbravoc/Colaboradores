@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl'; // Importa FormControl
+import FormControl from 'react-bootstrap/FormControl';
 
 const Buscador = ({ onBuscar }) => {
   const [termino, setTermino] = useState('');
@@ -14,7 +14,6 @@ const Buscador = ({ onBuscar }) => {
   return (
     <div>
       <InputGroup className='mb-3'>
-        {/* Usa FormControl dentro de InputGroup */}
         <FormControl
           type="text"
           placeholder="Buscar colaborador..."
